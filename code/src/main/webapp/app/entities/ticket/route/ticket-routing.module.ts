@@ -3,6 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
 import { TicketComponent } from '../list/ticket.component';
+
+import { TicketUserComponent } from '../listuser/ticketuser.component';
+import { TicketReportComponent } from '../listreport/ticketreport.component';
+
 import { TicketDetailComponent } from '../detail/ticket-detail.component';
 import { TicketUpdateComponent } from '../update/ticket-update.component';
 import { TicketRoutingResolveService } from './ticket-routing-resolve.service';
@@ -17,6 +21,17 @@ const ticketRoute: Routes = [
     },
     canActivate: [UserRouteAccessService],
   },
+  {
+    path: 'assign',
+    component: TicketUserComponent,
+    canActivate: [UserRouteAccessService],
+  },
+  {
+    path: 'report',
+    component: TicketReportComponent,
+    canActivate: [UserRouteAccessService],
+  },
+
   {
     path: ':id/view',
     component: TicketDetailComponent,
