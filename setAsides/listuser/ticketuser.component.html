@@ -1,0 +1,101 @@
+<div>
+  <h2 id="page-heading" data-cy="TicketHeading">
+    <span jhiTranslate="bugzeeApp.ticket.home.title">Your Tickets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="bugzeeApp.ticket.home.refreshListLabel">Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ticket"
+        [routerLink]="['/ticket/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="bugzeeApp.ticket.home.createLabel"> Create a new Ticket </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="tickets?.length === 0">
+    <span jhiTranslate="bugzeeApp.ticket.home.notFound">No tickets found assignedTo you</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="tickets && tickets.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr>
+          <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.title">Title</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.description">Description</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.dueDate">Due Date</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.date">Date</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.status">Status</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.type">Type</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.priority">Priority</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.project">Project</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.assignedTo">Assigned To</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.reportedBy">Reported By</span></th>
+          <th scope="col"><span jhiTranslate="bugzeeApp.ticket.label">Label</span></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/ticket', ticket.id, 'view']">{{ ticket.id }}</a>
+          </td>
+          <td>{{ ticket.title }}</td>
+          <td>{{ ticket.description }}</td>
+          <td>{{ ticket.dueDate | formatMediumDate }}</td>
+          <td>{{ ticket.date | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'bugzeeApp.Status.' + ticket.status }}">{{ ticket.status }}</td>
+          <td jhiTranslate="{{ 'bugzeeApp.Type.' + ticket.type }}">{{ ticket.type }}</td>
+          <td jhiTranslate="{{ 'bugzeeApp.Priority.' + ticket.priority }}">{{ ticket.priority }}</td>
+          <td>
+            <div *ngIf="ticket.project">
+              <a [routerLink]="['/project', ticket.project?.id, 'view']">{{ ticket.project?.name }}</a>
+            </div>
+          </td>
+          <td>
+            {{ ticket.assignedTo?.login }}
+          </td>
+          <td>
+            {{ ticket.reportedBy?.login }}
+          </td>
+          <td>
+            <span *ngFor="let label of ticket.labels; let last = last">
+              <a class="form-control-static" [routerLink]="['/label', label.id, 'view']">{{ label.label }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/ticket', ticket.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/ticket', ticket.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(ticket)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
