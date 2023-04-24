@@ -5,12 +5,12 @@
         <div class="d-flex justify-content-end">
             <button class="btn btn-info me-2" (click)="loadAll()" [disabled]="isLoading">
         <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
-        <span jhiTranslate="bugzeeApp.ticket.home.refreshListLabel">Refresh List</span>
+        <span jhiTranslate="bugz2App.ticket.home.refreshListLabel">Refresh List</span>
       </button>
 
             <button id="jh-create-entity" data-cy="entityCreateButton" class="btn btn-primary jh-create-entity create-ticket" [routerLink]="['/ticket/new']">
         <fa-icon icon="plus"></fa-icon>
-        <span jhiTranslate="bugzeeApp.ticket.home.createLabel"> Create a new Ticket </span>
+        <span jhiTranslate="bugz2App.ticket.home.createLabel"> Create a new Ticket </span>
       </button>
         </div>
     </h2>
@@ -20,7 +20,7 @@
     <jhi-alert></jhi-alert>
 
     <div class="alert alert-warning" id="no-result" *ngIf="tickets?.length === 0">
-        <span jhiTranslate="bugzeeApp.ticket.home.notFound">No tickets found</span>
+        <span jhiTranslate="bugz2App.ticket.home.notFound">No tickets found</span>
     </div>
 
     <div class="table-responsive" id="entities" *ngIf="tickets && tickets.length > 0">
@@ -28,17 +28,17 @@
             <thead>
                 <tr>
                     <th scope="col"><span jhiTranslate="global.field.id">ID</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.title">Title</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.description">Description</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.dueDate">Due Date</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.date">Date</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.status">Status</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.type">Type</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.priority">Priority</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.project">Project</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.assignedTo">Assigned To</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.reportedBy">Reported By</span></th>
-                    <th scope="col"><span jhiTranslate="bugzeeApp.ticket.label">Label</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.title">Title</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.description">Description</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.dueDate">Due Date</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.date">Date</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.status">Status</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.type">Type</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.priority">Priority</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.project">Project</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.assignedTo">Assigned To</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.reportedBy">Reported By</span></th>
+                    <th scope="col"><span jhiTranslate="bugz2App.ticket.label">Label</span></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -51,9 +51,9 @@
                     <td>{{ ticket.description }}</td>
                     <td>{{ ticket.dueDate | formatMediumDate }}</td>
                     <td>{{ ticket.date | formatMediumDatetime }}</td>
-                    <td jhiTranslate="{{ 'bugzeeApp.Status.' + ticket.status }}">{{ ticket.status }}</td>
-                    <td jhiTranslate="{{ 'bugzeeApp.Type.' + ticket.type }}">{{ ticket.type }}</td>
-                    <td jhiTranslate="{{ 'bugzeeApp.Priority.' + ticket.priority }}">{{ ticket.priority }}</td>
+                    <td jhiTranslate="{{ 'bugz2App.Status.' + ticket.status }}">{{ ticket.status }}</td>
+                    <td jhiTranslate="{{ 'bugz2App.Type.' + ticket.type }}">{{ ticket.type }}</td>
+                    <td jhiTranslate="{{ 'bugz2App.Priority.' + ticket.priority }}">{{ ticket.priority }}</td>
                     <td>
                         <div *ngIf="ticket.project">
                             <a [routerLink]="['/project', ticket.project.id, 'view']">{{ ticket.project.name }}</a>

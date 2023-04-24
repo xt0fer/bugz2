@@ -1,7 +1,7 @@
 {
   "home": {
-    "title": "BugZ2!",
-    "subtitle": "BugZ You Have",
+    "title": "BugZ2",
+    "subtitle": "a very Lame Bug/Issue/Ticket tracker!",
     "logged": {
       "message": "You are logged in as user \"{{username}}\"."
     },
