@@ -48,6 +48,15 @@ public class CacheConfiguration {
             createCache(cm, rocks.zipcode.bugz2.domain.User.class.getName());
             createCache(cm, rocks.zipcode.bugz2.domain.Authority.class.getName());
             createCache(cm, rocks.zipcode.bugz2.domain.User.class.getName() + ".authorities");
+            createCache(cm, rocks.zipcode.bugz2.domain.Project.class.getName());
+            createCache(cm, rocks.zipcode.bugz2.domain.Label.class.getName());
+            createCache(cm, rocks.zipcode.bugz2.domain.Label.class.getName() + ".tickets");
+            createCache(cm, rocks.zipcode.bugz2.domain.Ticket.class.getName());
+            createCache(cm, rocks.zipcode.bugz2.domain.Ticket.class.getName() + ".attachments");
+            createCache(cm, rocks.zipcode.bugz2.domain.Ticket.class.getName() + ".labels");
+            createCache(cm, rocks.zipcode.bugz2.domain.Attachment.class.getName());
+            createCache(cm, rocks.zipcode.bugz2.domain.Comment.class.getName());
+            createCache(cm, rocks.zipcode.bugz2.domain.Comment.class.getName() + ".parents");
             // jhipster-needle-ehcache-add-entry
         };
     }

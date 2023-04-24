@@ -1,0 +1,20 @@
+{
+  "applications": ["bugz2"],
+  "changelogDate": "20230424152953",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "project",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Project",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}

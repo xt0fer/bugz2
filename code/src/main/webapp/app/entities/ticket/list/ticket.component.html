@@ -1,0 +1,161 @@
+<div>
+  <h2 id="page-heading" data-cy="TicketHeading">
+    <span jhiTranslate="bugz2App.ticket.home.title">Tickets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="bugz2App.ticket.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-ticket"
+        [routerLink]="['/ticket/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="bugz2App.ticket.home.createLabel"> Create a new Ticket </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="tickets?.length === 0">
+    <span jhiTranslate="bugz2App.ticket.home.notFound">No Tickets found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="tickets && tickets.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="title">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.title">Title</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="description">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.description">Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dueDate">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.dueDate">Due Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="date">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.date">Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="status">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.status">Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="type">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.type">Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="priority">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.priority">Priority</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="project.name">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.project">Project</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="assignedTo.login">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.assignedTo">Assigned To</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="reportedBy.login">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.reportedBy">Reported By</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="label.label">
+            <div class="d-flex">
+              <span jhiTranslate="bugz2App.ticket.label">Label</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let ticket of tickets; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/ticket', ticket.id, 'view']">{{ ticket.id }}</a>
+          </td>
+          <td>{{ ticket.title }}</td>
+          <td>{{ ticket.description }}</td>
+          <td>{{ ticket.dueDate | formatMediumDate }}</td>
+          <td>{{ ticket.date | formatMediumDatetime }}</td>
+          <td jhiTranslate="{{ 'bugz2App.Status.' + ticket.status }}">{{ ticket.status }}</td>
+          <td jhiTranslate="{{ 'bugz2App.Type.' + ticket.type }}">{{ ticket.type }}</td>
+          <td jhiTranslate="{{ 'bugz2App.Priority.' + ticket.priority }}">{{ ticket.priority }}</td>
+          <td>
+            <div *ngIf="ticket.project">
+              <a [routerLink]="['/project', ticket.project.id, 'view']">{{ ticket.project.name }}</a>
+            </div>
+          </td>
+          <td>
+            {{ ticket.assignedTo?.login }}
+          </td>
+          <td>
+            {{ ticket.reportedBy?.login }}
+          </td>
+          <td>
+            <span *ngFor="let label of ticket.labels; let last = last">
+              <a class="form-control-static" [routerLink]="['/label', label.id, 'view']">{{ label.label }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/ticket', ticket.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/ticket', ticket.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(ticket)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

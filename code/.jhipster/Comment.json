@@ -1,0 +1,42 @@
+{
+  "applications": ["bugz2"],
+  "changelogDate": "20230424152957",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "comment",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "ZonedDateTime"
+    },
+    {
+      "fieldName": "text",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Comment",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "child",
+      "relationshipName": "parent",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "user",
+      "relationshipName": "login",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "parent",
+      "relationshipName": "child",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}
