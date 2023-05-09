@@ -6,6 +6,12 @@ _Once you generate a JHIPSTER project, how do you modify it to restrict certain 
 
 This is a common enough need in many ZipCode Spring projects.
 
+## Adding a simple vanillaJS
+
+look in `bugz2/code/src/main/resources/static` to find the three files that respond when you call the
+`/tickets.html` url.
+Very simple JS code to fetch a json API call and display the results simply. (See `app.js` in `static`)
+
 ## Generating the Code
 
 JHIPSTER is good at generating a large amount of code on top of the Spring App engine. 
