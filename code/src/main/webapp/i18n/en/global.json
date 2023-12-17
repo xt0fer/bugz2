@@ -12,6 +12,7 @@
         "ticket": "Ticket",
         "attachment": "Attachment",
         "comment": "Comment",
+        "note": "Note",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

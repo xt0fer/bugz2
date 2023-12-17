@@ -110,14 +110,6 @@ export class CommentService {
     };
   }
 
-  protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
-    if (res.body) {
-      res.body.forEach((comment: IComment) => {
-        comment.date = comment.date ? dayjs(comment.date) : undefined;
-      });
-    }
-    return res;
-  }
   protected convertResponseFromServer(res: HttpResponse<RestComment>): HttpResponse<IComment> {
     return res.clone({
       body: res.body ? this.convertDateFromServer(res.body) : null,

@@ -29,6 +29,11 @@ import { RouterModule } from '@angular/router';
         data: { pageTitle: 'bugz2App.comment.home.title' },
         loadChildren: () => import('./comment/comment.module').then(m => m.CommentModule),
       },
+      {
+        path: 'note',
+        data: { pageTitle: 'bugz2App.note.home.title' },
+        loadChildren: () => import('./note/note.module').then(m => m.NoteModule),
+      },
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ]),
   ],

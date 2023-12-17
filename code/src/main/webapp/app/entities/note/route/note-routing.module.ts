@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access.service';
-import { TicketComponent } from '../list/ticket.component';
-import { TicketDetailComponent } from '../detail/ticket-detail.component';
-import { TicketUpdateComponent } from '../update/ticket-update.component';
-import { TicketRoutingResolveService } from './ticket-routing-resolve.service';
+import { NoteComponent } from '../list/note.component';
+import { NoteDetailComponent } from '../detail/note-detail.component';
+import { NoteUpdateComponent } from '../update/note-update.component';
+import { NoteRoutingResolveService } from './note-routing-resolve.service';
 import { ASC } from 'app/config/navigation.constants';
 
-const ticketRoute: Routes = [
+const noteRoute: Routes = [
   {
     path: '',
-    component: TicketComponent,
+    component: NoteComponent,
     data: {
       defaultSort: 'id,' + ASC,
     },
@@ -19,32 +19,32 @@ const ticketRoute: Routes = [
   },
   {
     path: ':id/view',
-    component: TicketDetailComponent,
+    component: NoteDetailComponent,
     resolve: {
-      ticket: TicketRoutingResolveService,
+      note: NoteRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
-    component: TicketUpdateComponent,
+    component: NoteUpdateComponent,
     resolve: {
-      ticket: TicketRoutingResolveService,
+      note: NoteRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
-    component: TicketUpdateComponent,
+    component: NoteUpdateComponent,
     resolve: {
-      ticket: TicketRoutingResolveService,
+      note: NoteRoutingResolveService,
     },
     canActivate: [UserRouteAccessService],
   },
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(ticketRoute)],
+  imports: [RouterModule.forChild(noteRoute)],
   exports: [RouterModule],
 })
-export class TicketRoutingModule {}
+export class NoteRoutingModule {}

@@ -1,0 +1,39 @@
+{
+  "changelogDate": "20230426192012",
+  "fields": [
+    {
+      "fieldName": "content",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "created",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "desc",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Note",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityField": "title",
+      "otherEntityName": "ticket",
+      "otherEntityRelationshipName": "note",
+      "ownerSide": true,
+      "relationshipName": "ticket",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "note",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "no"
+}

@@ -45,6 +45,8 @@ relationship ManyToOne {
 relationship OneToMany {
   Comment{parent} to Comment{child}
   Ticket to Attachment 
+  //Project to Ticket{project(name)}
+
 }
 
 enum Status {
